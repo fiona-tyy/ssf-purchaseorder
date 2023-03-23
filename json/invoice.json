@@ -1,0 +1,9 @@
+{
+  "invoiceId": "81592cb9",
+  "cart": [
+    { "item": "apple", "quantity": 100 },
+    { "item": "orange", "quantity": 50 },
+    { "item": "bread", "quantity": 5 }
+  ],
+  "shipping": { "name": "bern", "address": "changi" }
+}

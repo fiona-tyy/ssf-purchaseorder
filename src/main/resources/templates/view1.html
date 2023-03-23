@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Shopping Cart</title>
+  </head>
+  <body>
+    <h1>Shopping Cart</h1>
+    <form method="POST" data-th-action="@{/shipping}" data-th-object="${item}">
+      <table>
+        <tr>
+          <td>Item:</td>
+          <td>
+            <select name="item" data-th-field="*{item}">
+              <option value="apple">Apple</option>
+              <option value="orange">Orange</option>
+              <option value="bread">Bread</option>
+              <option value="cheese">Cheese</option>
+              <option value="chicken">Chicken</option>
+              <option value="mineral_water">Mineral Water</option>
+              <option value="instant_noodles">Instant Noodles</option>
+            </select>
+          </td>
+        </tr>
+        <tr data-th-if="${#fields.hasErrors('item')}">
+          <td></td>
+          <td>
+            <span
+              data-th-errors="*{item}"
+              data-th-errorclass="error"
+              style="color: red"
+            ></span>
+          </td>
+        </tr>
+        <tr>
+          <td>Quantity:</td>
+          <td>
+            <input type="number" min="1" step="1" data-th-field="*{quantity}" />
+          </td>
+        </tr>
+        <tr data-th-if="${#fields.hasErrors('quantity')}">
+          <td></td>
+          <td>
+            <span
+              data-th-errors="*{quantity}"
+              data-th-errorclass="error"
+              style="color: red"
+            ></span>
+          </td>
+        </tr>
+        <tr>
+          <div data-th-unless="${#lists.isEmpty(cart.contents)}">
+            <table border="solid" width="300px">
+              <tr>
+                <th width="50%">Item</th>
+                <th>Quantity</th>
+              </tr>
+              <tr data-th-each="it : ${cart.contents}" data-th-object="${it}">
+                <td data-th-text="*{item}" style="text-align: center"></td>
+                <td data-th-text="*{quantity}" style="text-align: center"></td>
+              </tr>
+            </table>
+          </div>
+        </tr>
+        <tr>
+          <td>
+            <div data-th-if="${#lists.isEmpty(cart.contents)}">
+              <h3>Your cart is empty</h3>
+            </div>
+          </td>
+        </tr>
+        <tr>
+          <td>
+            <button type="submit" formmethod="POST" formaction="/">Add</button>
+          </td>
+          <td>
+            <button type="submit">Next</button>
+          </td>
+        </tr>
+      </table>
+    </form>
+  </body>
+</html>

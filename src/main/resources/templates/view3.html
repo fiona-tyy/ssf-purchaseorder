@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Invoice</title>
+  </head>
+  <body>
+    <h1>Invoice</h1>
+    <table data-th-object="${invoice}">
+      <tr>
+        <td>Invoice id:</td>
+        <td>
+          <a
+            data-th-href="@{/invoice/{invoiceId}(invoiceId=${invoice.invoiceId})}"
+            data-th-text="*{invoiceId}"
+          ></a>
+        </td>
+      </tr>
+      <tr>
+        <td>Name:</td>
+        <td data-th-text="*{name}"></td>
+      </tr>
+      <tr>
+        <td>Address:</td>
+        <td data-th-text="*{address}"></td>
+      </tr>
+      <tr>
+        <td>Total:</td>
+        <td data-th-text="*{#numbers.formatCurrency(totalCost)}"></td>
+      </tr>
+    </table>
+    <form method="GET" action="/">
+      <button type="submit">Place another order</button>
+    </form>
+  </body>
+</html>
